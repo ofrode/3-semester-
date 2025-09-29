@@ -1,156 +1,66 @@
 #include "../headers/string.h"
-#include <iostream>
-#include <cstring>
 
 using namespace std;
 
-void String::freeMemory()
+String::String() : str(nullptr), length(0) {}
+
+String::String(const char *s)
 {
-    if (data != nullptr)
-    {
-        delete[] data;
-        data = nullptr;
-    }
-    length = 0;
+    length = strlen(s);
+    str = new char[length + 1];
+    strcpy(str, s);
 }
 
-void String::copyFrom(const char *str, int len)
+String::String(const String &other)
 {
-    data = new char[len + 1];
-    strncpy(data, str, len);
-    data[len] = '\0';
-    length = len;
-}
-
-String::String() : data(new char[1])
-{
-    data[0] = '\0';
-}
-
-String::String(const char *str) : data(nullptr)
-{
-    if (str != nullptr)
-    {
-        length = strlen(str);
-        data = new char[length + 1];
-        strncpy(data, str, length);
-        data[length] = '\0';
-    }
-    else
-    {
-        data = new char[1];
-        data[0] = '\0';
-    }
-}
-
-String::String(const String &other) : data(nullptr), length(other.length)
-{
-    if (other.data != nullptr)
-    {
-        data = new char[length + 1];
-        strncpy(data, other.data, length);
-        data[length] = '\0';
-    }
-    else
-    {
-        data = new char[1];
-        data[0] = '\0';
-    }
-}
-
-String::~String()
-{
-    freeMemory();
-}
-
-String &String::operator=(const char *str)
-{
-    if (this->data != str)
-    {
-        freeMemory();
-        if (str != nullptr)
-        {
-            length = strlen(str);
-            data = new char[length + 1];
-            strncpy(data, str, length);
-            data[length] = '\0';
-        }
-        else
-        {
-            data = new char[1];
-            data[0] = '\0';
-            length = 0;
-        }
-    }
-    return *this;
+    length = other.length;
+    str = new char[length + 1];
+    strcpy(str, other.str);
 }
 
 String &String::operator=(const String &other)
 {
     if (this != &other)
     {
-        freeMemory();
+        delete[] str;
+
         length = other.length;
-        if (other.data != nullptr)
-        {
-            data = new char[length + 1];
-            strncpy(data, other.data, length);
-            data[length] = '\0';
-        }
-        else
-        {
-            data = new char[1];
-            data[0] = '\0';
-        }
-    }
-    return *this;
-}
-
-String &String::operator+=(const char *str)
-{
-    if (str != nullptr && str[0] != '\0')
-    {
-        auto strLen = strlen(str);
-        auto *newData = new char[length + strLen + 1];
-
-        if (data != nullptr)
-        {
-            strncpy(newData, data, length);
-            newData[length] = '\0';
-        }
-        else
-        {
-            newData[0] = '\0';
-        }
-
-        strncat(newData, str, strLen);
-        freeMemory();
-        data = newData;
-        length += strLen;
+        str = new char[length + 1];
+        strcpy(str, other.str);
     }
     return *this;
 }
 
 String &String::operator+=(const String &other)
 {
-    if (other.length > 0 && other.data != nullptr)
-    {
-        auto *newData = new char[length + other.length + 1];
+    size_t newLength = length + other.length;
+    char *newStr = new char[newLength + 1];
 
-        if (data != nullptr)
-        {
-            strncpy(newData, data, length);
-            newData[length] = '\0';
-        }
-        else
-        {
-            newData[0] = '\0';
-        }
+    strcpy(newStr, str);
+    strcat(newStr, other.str);
 
-        strncat(newData, other.data, other.length);
-        freeMemory();
-        data = newData;
-        length += other.length;
-    }
+    delete[] str;
+    str = newStr;
+    length = newLength;
+
     return *this;
+}
+
+String::~String()
+{
+    delete[] str;
+}
+
+ostream &operator<<(ostream &os, const String &s)
+{
+    os << s.str;
+    return os;
+}
+
+istream &operator>>(istream &is, String &s)
+{
+    char buffer[1024];
+    is.getline(buffer, 1024);
+    s = String(buffer);
+    return is;
 }

@@ -1,7 +1,4 @@
-#include "../headers/function.h"
-#include "../headers/string.h"
-#include <iostream>
-#include <limits>
+#include "../headers/functions.h"
 
 using namespace std;
 
@@ -14,7 +11,7 @@ void clearInputBuffer()
 int menu()
 {
     int choice;
-    cout << "1 - Ввести первую строку\n";
+    cout << "\n1 - Ввести первую строку\n";
     cout << "2 - Сложить строки\n";
     cout << "3 - Сложить строку саму с собой\n";
     cout << "4 - Выход\n";
@@ -39,12 +36,11 @@ String concatenateStringMultipleTimes(const String &original, int count)
     return result;
 }
 
-void inputString(String& str1, String& str2)
+void inputString(String &str1, String &str2)
 {
     int choice;
     cout << "\nВведите первую строку: ";
     cin >> str1;
-    clearInputBuffer();
 
     cout << "\nВы хотите скопировать первую строку (1) или написать что-то другое (2): ";
     cin >> choice;
@@ -53,59 +49,62 @@ void inputString(String& str1, String& str2)
     if (choice == 1)
     {
         str2 = str1;
-        cout << "Вторая строка скопирована из первой.\n";
+        cout << "\nВторая строка скопирована из первой.\n";
     }
     else
     {
         cout << "\nВведите вторую строку: ";
         cin >> str2;
     }
-    cout << "\nСтроки введены!!!\n";
-    cout << "\nНажмите Enter для продолжения\n";
+    cout << "\nСтроки введены!!!\nВведите Enter для продолжения";
 }
 
-void sumString(const String& str1, const String& str2, String& str3)
+void concatenateString(const String &str1, const String &str2)
 {
+    String result;
     int choice;
-    cout << "Выберите как складывать строки: 1 - С пробелом, 2 - Без пробела: ";
+    cout << "\nВыберите как складывать строки: 1 - С пробелом, 2 - Без пробела: ";
     cin >> choice;
     clearInputBuffer();
 
     if (choice == 1)
     {
-        str3 = str1 + "  " + str2;
+        result = str1;
+        result += " ";
+        result += str2;
     }
     else
     {
-        str3 = str1 + str2;
+        result = str1;
+        result += str2;
     }
     cout << "\nСтроки сложены!!!\n";
-    cout << "Ваша итоговая строка: " << str3 << "\n";
+    cout << "Ваша итоговая строка: " << result << "\nВведите Enter для продолжения";
 }
 
-void multiplyString(String& str1, String& str2)
-{   
+void multiplyString(String &str1, String &str2)
+{
+    String result;
     int choice;
     int count;
     cout << "\nСколько раз надо просуммировать: ";
     cin >> count;
     clearInputBuffer();
 
-    cout << "Какую строку хотите просуммировать (1 или 2): ";
+    cout << "\nКакую строку хотите просуммировать (1 или 2): ";
     cin >> choice;
     clearInputBuffer();
+
     if (choice == 1)
     {
-        clearInputBuffer();
-        str1 = concatenateStringMultipleTimes(str1, count);
+        result = concatenateStringMultipleTimes(str1, count);
         cout << "\nСтрока сложена сама с собой " << count << " раз!!!\n";
-        cout << "Ваша итоговая строка: " << str1 << "\n";
+        cout << "Ваша итоговая строка: " << result << "\nВведите Enter для продолжения";
     }
     else
     {
-        clearInputBuffer();
-        str2 = concatenateStringMultipleTimes(str2, count);
+        result = concatenateStringMultipleTimes(str2, count);
         cout << "\nСтрока сложена сама с собой " << count << " раз!!!\n";
-        cout << "Ваша итоговая строка: " << str2 << "\n";
+        cout << "Ваша итоговая строка: " << result << "\nВведите Enter для продолжения";
     }
 }

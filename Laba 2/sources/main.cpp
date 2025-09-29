@@ -1,15 +1,18 @@
-#include "../headers/string.h"
-#include "../headers/function.h"
 #include <iostream>
+#include <locale>
+#include "../headers/string.h"
+#include "../headers/functions.h"
 
 using namespace std;
 
 int main()
 {
+    system("clear");
+    setlocale(LC_ALL, "ru_RU.UTF-8");
+
     int choice;
     String str1;
     String str2;
-    String str3;
 
     while (true)
     {
@@ -18,15 +21,15 @@ int main()
         switch (choice)
         {
         case 1:
-                inputString(str1, str2);
+            inputString(str1, str2);
             break;
 
         case 2:
-                sumString(str1, str2, str3);
+            concatenateString(str1, str2);
             break;
 
         case 3:
-                multiplyString(str1, str2);
+            multiplyString(str1, str2);
             break;
         case 4:
             return 0;
@@ -35,6 +38,5 @@ int main()
             break;
         }
         clearInputBuffer();
-        cout << "\nНажмите Enter для продолжения\n";
     }
 }
