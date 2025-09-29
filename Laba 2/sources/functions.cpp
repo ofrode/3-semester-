@@ -70,7 +70,7 @@ void concatenateString(const String &str1, const String &str2)
     if (choice == 1)
     {
         result = str1;
-        result += " ";
+        result += String(" ");
         result += str2;
     }
     else
@@ -82,7 +82,7 @@ void concatenateString(const String &str1, const String &str2)
     cout << "Ваша итоговая строка: " << result << "\nВведите Enter для продолжения";
 }
 
-void multiplyString(String &str1, String &str2)
+void multiplyString(const String &str1,const String &str2)
 {
     String result;
     int choice;

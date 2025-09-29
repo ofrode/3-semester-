@@ -11,9 +11,8 @@ String::String(const char *s)
     strcpy(str, s);
 }
 
-String::String(const String &other)
+String::String(const String &other) : length(other.length)
 {
-    length = other.length;
     str = new char[length + 1];
     strcpy(str, other.str);
 }
@@ -34,7 +33,7 @@ String &String::operator=(const String &other)
 String &String::operator+=(const String &other)
 {
     size_t newLength = length + other.length;
-    char *newStr = new char[newLength + 1];
+    auto *newStr = new char[newLength + 1];
 
     strcpy(newStr, str);
     strcat(newStr, other.str);

@@ -10,7 +10,7 @@ private:
 
 public:
     String();
-    String(const char *s);
+    explicit String(const char *s);
     String(const String &other);
 
     String &operator=(const String &other);
