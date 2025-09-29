@@ -4,18 +4,20 @@ using namespace std;
 
 String::String() : str(nullptr), length(0) {}
 
-String::String(const char *s) : length(strlen(s))
+String::String(const char *s) : length(s ? strlen(s) : 0)
 {
     str = new char[length + 1];
-    strncpy(str, s, length);
+    if (s && length > 0)
+    {
+        memcpy(str, s, length + 1);
+    }
     str[length] = '\0';
 }
 
 String::String(const String &other) : length(other.length)
 {
     str = new char[length + 1];
-    strncpy(str, other.str, length);
-    str[length] = '\0';
+    memcpy(str, other.str, length + 1);
 }
 
 String &String::operator=(const String &other)
@@ -25,8 +27,7 @@ String &String::operator=(const String &other)
         delete[] str;
         length = other.length;
         str = new char[length + 1];
-        strncpy(str, other.str, length);
-        str[length] = '\0';
+        memcpy(str, other.str, length + 1);
     }
     return *this;
 }
@@ -36,9 +37,8 @@ String &String::operator+=(const String &other)
     size_t newLength = length + other.length;
     auto *newStr = new char[newLength + 1];
 
-    strncpy(newStr, str, length);
-    strncpy(newStr + length, other.str, other.length + 1);
-    newStr[newLength] = '\0';
+    memcpy(newStr, str, length);
+    memcpy(newStr + length, other.str, other.length + 1);
 
     delete[] str;
     str = newStr;
