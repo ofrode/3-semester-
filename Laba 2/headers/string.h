@@ -18,7 +18,17 @@ public:
 
     ~String();
 
-    friend std::ostream &operator<<(std::ostream &os, const String &s);
-    friend std::istream &operator>>(std::istream &is, String &s);
+    friend std::ostream &operator<<(std::ostream &os, const String &s)
+    {
+        os << s.str;
+        return os;
+    }
 
+    friend std::istream &operator>>(std::istream &is, String &s)
+    {
+        char buffer[1024];
+        is.getline(buffer, 1024);
+        s = String(buffer);
+        return is;
+    }
 };

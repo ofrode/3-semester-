@@ -50,17 +50,3 @@ String::~String()
 {
     delete[] str;
 }
-
-ostream &operator<<(ostream &os, const String &s)
-{
-    os << s.str;
-    return os;
-}
-
-istream &operator>>(istream &is, String &s)
-{
-    char buffer[1024];
-    is.getline(buffer, 1024);
-    s = String(buffer);
-    return is;
-}
