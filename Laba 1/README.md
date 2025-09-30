@@ -1,4 +1,4 @@
-https://sonarcloud.io/summary/new_code?id=ofrode_laba_3sem.1
+https://sonarcloud.io/summary/overall?id=ofrode_3-semester-&branch=main
 
 **Вариант 4**
 

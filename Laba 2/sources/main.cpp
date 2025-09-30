@@ -37,6 +37,5 @@ int main()
             cout << "Неверный выбор!\n";
             break;
         }
-        clearInputBuffer();
     }
 }
