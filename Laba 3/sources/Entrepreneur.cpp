@@ -24,9 +24,8 @@ Entrepreneur::~Entrepreneur()
     delete[] taxSums;
 }
 
-void Entrepreneur::input()
+void Entrepreneur::inputEntrepreneur()
 {
-    Person::input();
     cout << "Введите номер лицензии: ";
     cin >> licenseNumber;
     cout << "Введите адрес регистрации: ";
@@ -49,6 +48,12 @@ void Entrepreneur::input()
     }
 }
 
+void Entrepreneur::input()
+{
+    Person::input();
+    inputEntrepreneur();
+}
+
 void Entrepreneur::fillTestData()
 {
     Person::fillTestData();
@@ -65,12 +70,17 @@ void Entrepreneur::fillTestData()
     taxSums[1] = 2000;
 }
 
-void Entrepreneur::printInfo() const
+void Entrepreneur::printEntrepreneur() const
 {
-    Person::printInfo();
-    cout << "Лицензия: " << licenseNumber
+        cout << "Лицензия: " << licenseNumber
          << ", Адрес регистрации: " << registrationAddress
          << ", УНН: " << UNN << endl;
     for (int i = 0; i < taxCount; i++)
         cout << "  " << taxDates[i] << " - " << taxSums[i] << " руб." << endl;
+}
+
+void Entrepreneur::printInfo() const
+{
+    Person::printInfo();
+    Entrepreneur::printEntrepreneur();
 }

@@ -19,44 +19,8 @@ Chelnok::~Chelnok()
     delete[] purchaseAddresses;
 }
 
-void Chelnok::input()
+void Chelnok::inputChelnok()
 {
-    Person::input();
-
-    cout << "Введите номер лицензии: ";
-    cin >> licenseNumber;
-    cout << "Введите адрес регистрации: ";
-    cin.ignore();
-    getline(cin, registrationAddress);
-    cout << "Введите УНН: ";
-    cin >> UNN;
-
-    cout << "Введите количество налоговых платежей: ";
-    cin >> taxCount;
-    taxDates = new string[taxCount];
-    taxSums = new double[taxCount];
-    for (int i = 0; i < taxCount; i++)
-    {
-        cout << "  Дата платежа: ";
-        cin >> taxDates[i];
-        cout << "  Сумма: ";
-        cin >> taxSums[i];
-    }
-
-    cout << "Введите данные паспорта: ";
-    cin >> passportData;
-    cout << "Введите количество пересечений границы: ";
-    cin >> crossCount;
-    crossDates = new string[crossCount];
-    crossCountries = new string[crossCount];
-    for (int i = 0; i < crossCount; i++)
-    {
-        cout << "  Дата: ";
-        cin >> crossDates[i];
-        cout << "  Страна: ";
-        cin >> crossCountries[i];
-    }
-
     cout << "Введите количество адресов покупок: ";
     cin >> addrCount;
     cin.ignore();
@@ -66,6 +30,14 @@ void Chelnok::input()
         cout << "  Адрес: ";
         getline(cin, purchaseAddresses[i]);
     }
+}
+
+void Chelnok::input()
+{
+    Person::input();
+    Tourist::inputTourist();
+    Entrepreneur::inputEntrepreneur();
+    Chelnok::inputChelnok();
 }
 
 void Chelnok::fillTestData()
@@ -78,23 +50,17 @@ void Chelnok::fillTestData()
     purchaseAddresses[1] = "г. Минск, пр. Держинского, д.20";
 }
 
-void Chelnok::printInfo() const
+void Chelnok::printInfoChelnok() const
 {
-    Person::printInfo();
-
-    cout << "--- Данные предпринимателя ---" << endl;
-    cout << "Лицензия: " << licenseNumber
-         << ", Адрес регистрации: " << registrationAddress
-         << ", УНН: " << UNN << endl;
-    for (int i = 0; i < taxCount; i++)
-        cout << "  " << taxDates[i] << " - " << taxSums[i] << " руб." << endl;
-
-    cout << "--- Данные туриста ---" << endl;
-    cout << "Паспорт: " << passportData << endl;
-    for (int i = 0; i < crossCount; i++)
-        cout << "  " << crossDates[i] << " - " << crossCountries[i] << endl;
-
     cout << "--- Адреса покупок ---" << endl;
     for (int i = 0; i < addrCount; i++)
         cout << "  " << purchaseAddresses[i] << endl;
+}
+
+void Chelnok::printInfo() const
+{
+    Person::printInfo();
+    Tourist::printInfoTourist();
+    Entrepreneur::printEntrepreneur();
+    Chelnok::printInfoChelnok();
 }

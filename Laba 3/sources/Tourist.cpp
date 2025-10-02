@@ -26,6 +26,11 @@ Tourist::~Tourist()
 void Tourist::input()
 {
     Person::input();
+    Tourist::inputTourist();
+}
+
+void Tourist::inputTourist()
+{
     cout << "Введите данные паспорта: ";
     cin >> passportData;
 
@@ -56,10 +61,15 @@ void Tourist::fillTestData()
     crossCountries[1] = "Германия";
 }
 
-void Tourist::printInfo() const
+void Tourist::printInfoTourist() const
 {
-    Person::printInfo();
     cout << "Паспорт: " << passportData << endl;
     for (int i = 0; i < crossCount; i++)
         cout << "  " << crossDates[i] << " - " << crossCountries[i] << endl;
+}
+
+void Tourist::printInfo() const
+{
+    Person::printInfo();
+    Tourist::printInfoTourist();
 }

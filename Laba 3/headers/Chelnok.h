@@ -14,12 +14,24 @@ private:
     int addrCount = 0;
 
 public:
-
     Chelnok() = default;
     Chelnok(const std::string *addresses, int count);
+    Chelnok(const Chelnok &other) : Person(other), Entrepreneur(other), Tourist(other), purchaseAddresses(nullptr), addrCount(other.addrCount)
+    {
+        if (addrCount > 0)
+        {
+            purchaseAddresses = new std::string[addrCount];
+            for (int i = 0; i < addrCount; ++i)
+            {
+                purchaseAddresses[i] = other.purchaseAddresses[i];
+            }
+        }
+    }
     ~Chelnok() override;
 
+    void inputChelnok();
     void input() override;
     void fillTestData() override;
+    void printInfoChelnok() const;
     void printInfo() const override;
 };
