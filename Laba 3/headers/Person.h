@@ -17,6 +17,7 @@ private:
 public:
     Person() = default;
     Person(Person &other) = default;
+    Person& operator=(const Person&& other) noexcept;
     
     virtual void input();
     virtual void fillTestData();

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Tourist::Tourist(Tourist &&other) noexcept : Person(move(other)), passportData(std::move(other.passportData)), crossDates(other.crossDates),
+Tourist::Tourist(Tourist &&other) noexcept : Person(move(other)), passportData(move(other.passportData)), crossDates(other.crossDates),
                                              crossCountries(other.crossCountries), crossCount(other.crossCount)
 {
     other.crossDates = nullptr;
@@ -14,7 +14,6 @@ Tourist &Tourist::operator=(Tourist &&other) noexcept
 {
     if (this != &other)
     {
-        Person::operator=(std::move(other));
 
         delete[] crossDates;
         delete[] crossCountries;
