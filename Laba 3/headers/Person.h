@@ -16,7 +16,7 @@ private:
 
 public:
     Person() = default;
-    Person(const Person &other) = default;
+    Person(Person &other) = default;
     
     virtual void input();
     virtual void fillTestData();

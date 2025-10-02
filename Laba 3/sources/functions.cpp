@@ -76,7 +76,7 @@ void addPerson(Person **&people, int &count)
 
 void printAll(span<Person*> people)
 {
-    for (auto* const person : people) {
+    for (const Person* person : people) {
         if (person != nullptr) {
             person->printInfo();
             cout << "\n";

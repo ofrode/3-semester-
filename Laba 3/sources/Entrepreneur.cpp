@@ -2,8 +2,8 @@
 
 using namespace std;
 
-Entrepreneur::Entrepreneur(Entrepreneur &&other) noexcept : Person(move(other)), licenseNumber(std::move(other.licenseNumber)), registrationAddress(move(other.registrationAddress)),
-                                                            UNN(move(other.UNN)), taxDates(other.taxDates), taxSums(other.taxSums), taxCount(other.taxCount)
+Entrepreneur::Entrepreneur(Entrepreneur &&other) noexcept : Person(std::move(other)), licenseNumber(std::move(other.licenseNumber)), registrationAddress(move(other.registrationAddress)),
+                                                            UNN(std::move(other.UNN)), taxDates(other.taxDates), taxSums(other.taxSums), taxCount(other.taxCount)
 {
     other.taxDates = nullptr;
     other.taxSums = nullptr;
