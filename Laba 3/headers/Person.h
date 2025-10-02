@@ -7,13 +7,14 @@
 class Person
 {
 protected:
-    std::string firstName;
-    std::string lastName;
-    std::string patronymic;
+    std::string firstName = "1";
+    std::string lastName = "1";
+    std::string patronymic = "1";
     
-    int birthYear;
+    int birthYear = 2000;
 
 public:
+    Person() = default;
     virtual void input();
     virtual void fillTestData();
     virtual void printInfo() const;

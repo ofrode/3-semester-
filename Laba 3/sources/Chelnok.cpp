@@ -2,6 +2,18 @@
 
 using namespace std;
 
+Chelnok::Chelnok(const std::string *addresses, int count) : addrCount(count)
+{
+    if (count > 0 && addresses)
+    {
+        purchaseAddresses = new std::string[count];
+        for (int i = 0; i < count; ++i)
+        {
+            purchaseAddresses[i] = addresses[i];
+        }
+    }
+}
+
 Chelnok::~Chelnok()
 {
     delete[] purchaseAddresses;

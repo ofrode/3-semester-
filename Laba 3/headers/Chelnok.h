@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "check.h"
+#include "Person.h"
 #include "Tourist.h"
 #include "Entrepreneur.h"
 
@@ -13,7 +14,10 @@ private:
     int addrCount = 0;
 
 public:
-    ~Chelnok();
+
+    Chelnok() = default;
+    Chelnok(const std::string *addresses, int count);
+    ~Chelnok() override;
 
     void input() override;
     void fillTestData() override;

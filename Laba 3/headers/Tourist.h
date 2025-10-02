@@ -8,13 +8,15 @@
 class Tourist : virtual public Person
 {
 protected:
-    std::string passportData;
+    std::string passportData = "1";
     std::string *crossDates = nullptr;
     std::string *crossCountries = nullptr;
     int crossCount = 0;
 
 public:
-    ~Tourist();
+    Tourist() = default;
+    Tourist(const Tourist& other);
+    ~Tourist() override;
 
     void input() override;
     void fillTestData() override;

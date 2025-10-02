@@ -17,7 +17,7 @@ int main()
     int count = 0;
 
     int choice;
-    while (1)
+    while (true)
     {
         cout << "\n=== МЕНЮ ===\n";
         cout << "1 - Создать список людей\n";
@@ -36,7 +36,7 @@ int main()
             addPerson(people, count);
             break;
         case 3:
-            printAll(people, count);
+            printAll({people, static_cast<std::size_t>(count)});
             break;
         case 0:
             for (int i = 0; i < count; i++)

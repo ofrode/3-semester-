@@ -63,7 +63,7 @@ void createList(Person **&people, int &count)
 void addPerson(Person **&people, int &count)
 {
     int newCount = count + 1;
-    Person **temp = new Person *[newCount];
+    auto **temp = new Person *[newCount];
     for (int i = 0; i < count; i++)
         temp[i] = people[i];
     delete[] people;
@@ -74,16 +74,11 @@ void addPerson(Person **&people, int &count)
     count = newCount;
 }
 
-void printAll(Person **people, int count)
+void printAll(span<Person*> people)
 {
-    if (count == 0)
-    {
-        cout << "Нет сохраненных людей.\n";
-        return;
-    }
-    for (int i = 0; i < count; i++)
-    {
-        cout << "\nЧеловек #" << i + 1 << ":\n";
-        people[i]->printInfo();
+    for (auto* person : people) {
+        if (person != nullptr) {
+            person->printInfo();
+        }
     }
 }

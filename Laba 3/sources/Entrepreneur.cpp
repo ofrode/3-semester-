@@ -2,6 +2,22 @@
 
 using namespace std;
 
+Entrepreneur::Entrepreneur(const Entrepreneur &other) : Person(other), licenseNumber(other.licenseNumber), registrationAddress(other.registrationAddress),
+                                                        UNN(other.UNN), taxDates(nullptr), taxSums(nullptr), taxCount(other.taxCount)
+{
+    if (taxCount > 0)
+    {
+        taxDates = new std::string[taxCount];
+        taxSums = new double[taxCount];
+
+        for (int i = 0; i < taxCount; ++i)
+        {
+            taxDates[i] = other.taxDates[i];
+            taxSums[i] = other.taxSums[i];
+        }
+    }
+}
+
 Entrepreneur::~Entrepreneur()
 {
     delete[] taxDates;
