@@ -23,7 +23,7 @@ Person *createPerson()
     }
     else if (type == 3)
     {
-        p = new Chelnok();
+        p = static_cast<Entrepreneur*>(new Chelnok());;
     }
     else
     {
@@ -79,6 +79,7 @@ void printAll(span<Person*> people)
     for (auto* person : people) {
         if (person != nullptr) {
             person->printInfo();
+            cout << "\n";
         }
     }
 }

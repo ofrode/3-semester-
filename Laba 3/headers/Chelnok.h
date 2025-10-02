@@ -16,7 +16,7 @@ private:
 public:
     Chelnok() = default;
     Chelnok(const std::string *addresses, int count);
-    Chelnok(const Chelnok &other) : Person(other), Entrepreneur(other), Tourist(other), purchaseAddresses(nullptr), addrCount(other.addrCount)
+    Chelnok(const Chelnok &other): Entrepreneur(other),Tourist(other),addrCount(other.addrCount)
     {
         if (addrCount > 0)
         {

@@ -15,7 +15,7 @@ private:
 
 public:
     Person() = default;
-    Person(const Person &other): firstName(other.firstName),lastName(other.lastName),patronymic(other.patronymic),birthYear(other.birthYear){};
+    Person(const Person &other) = default;
     
     virtual void input();
     virtual void fillTestData();

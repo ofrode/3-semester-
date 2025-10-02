@@ -5,7 +5,7 @@
 #include "check.h"
 #include "Person.h"
 
-class Tourist : virtual public Person
+class Tourist : public Person
 {
 private:
     std::string passportData = "1";
@@ -15,9 +15,7 @@ private:
 
 public:
     Tourist() = default;
-    Tourist(const Tourist &other);
-    Tourist(const Tourist &other) : Person(other), passportData(other.passportData), crossDates(nullptr),
-                                    crossCountries(nullptr), crossCount(other.crossCount)
+    Tourist(const Tourist &other) : Person(other), passportData(other.passportData), crossCount(other.crossCount)
     {
         if (crossCount > 0)
         {
@@ -33,9 +31,9 @@ public:
     }
     ~Tourist() override;
 
-    void input() override;
-    void inputTourist();
-    void fillTestData() override;
-    void printInfoTourist() const;
-    void printInfo() const override;
+    virtual void input() override;
+    virtual void inputTourist();
+    virtual void fillTestData() override;
+    virtual void printInfoTourist() const;
+    virtual void printInfo() const override;
 };

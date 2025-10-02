@@ -2,21 +2,6 @@
 
 using namespace std;
 
-Tourist::Tourist(const Tourist &other) : Person(other), passportData(other.passportData), crossDates(nullptr), crossCountries(nullptr), crossCount(other.crossCount)
-{
-    if (crossCount > 0)
-    {
-        crossDates = new std::string[crossCount];
-        crossCountries = new std::string[crossCount];
-
-        for (int i = 0; i < crossCount; ++i)
-        {
-            crossDates[i] = other.crossDates[i];
-            crossCountries[i] = other.crossCountries[i];
-        }
-    }
-}
-
 Tourist::~Tourist()
 {
     delete[] crossDates;

@@ -34,8 +34,7 @@ void Chelnok::inputChelnok()
 
 void Chelnok::input()
 {
-    Person::input();
-    Tourist::inputTourist();
+    Tourist::input();
     Entrepreneur::inputEntrepreneur();
     Chelnok::inputChelnok();
 }
@@ -59,8 +58,7 @@ void Chelnok::printInfoChelnok() const
 
 void Chelnok::printInfo() const
 {
-    Person::printInfo();
-    Tourist::printInfoTourist();
+    Tourist::printInfo();
     Entrepreneur::printEntrepreneur();
     Chelnok::printInfoChelnok();
 }

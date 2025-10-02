@@ -5,7 +5,7 @@
 #include "check.h"
 #include "Person.h"
 
-class Entrepreneur : virtual public Person
+class Entrepreneur : public Person
 {
 private:
     std::string licenseNumber = "1";
@@ -18,8 +18,8 @@ private:
 
 public:
     Entrepreneur() = default;
-    Entrepreneur(const Entrepreneur &other) : Person(other), licenseNumber(other.licenseNumber), registrationAddress(other.registrationAddress), UNN(other.UNN),
-                                              taxDates(nullptr), taxSums(nullptr), taxCount(other.taxCount)
+    Entrepreneur(const Entrepreneur &other) : Person(other), licenseNumber(other.licenseNumber), registrationAddress(other.registrationAddress),
+                                              UNN(other.UNN), taxCount(other.taxCount)
     {
         if (taxCount > 0)
         {
@@ -35,9 +35,9 @@ public:
     }
     ~Entrepreneur() override;
 
-    void inputEntrepreneur();
-    void input() override;
-    void fillTestData() override;
-    void printEntrepreneur() const;
-    void printInfo() const override;
+    virtual void inputEntrepreneur();
+    virtual void input() override;
+    virtual void fillTestData() override;
+    virtual void printEntrepreneur() const;
+    virtual void printInfo() const override;
 };
