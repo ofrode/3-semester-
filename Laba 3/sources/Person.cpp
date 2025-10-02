@@ -11,7 +11,7 @@ void Person::input()
     cout << "Введите отчество: ";
     cin >> patronymic;
     cout << "Введите год рождения: ";
-    cin >> birthYear;
+    birthYear = checkRange(1900, 2025);
 }
 
 void Person::fillTestData()

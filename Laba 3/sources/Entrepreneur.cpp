@@ -2,6 +2,37 @@
 
 using namespace std;
 
+Entrepreneur::Entrepreneur(Entrepreneur &&other) noexcept : Person(move(other)), licenseNumber(std::move(other.licenseNumber)), registrationAddress(move(other.registrationAddress)),
+                                                            UNN(move(other.UNN)), taxDates(other.taxDates), taxSums(other.taxSums), taxCount(other.taxCount)
+{
+    other.taxDates = nullptr;
+    other.taxSums = nullptr;
+    other.taxCount = 0;
+}
+
+Entrepreneur &Entrepreneur::operator=(Entrepreneur &&other) noexcept
+{
+    if (this != &other)
+    {
+        Person::operator=(std::move(other));
+
+        delete[] taxDates;
+        delete[] taxSums;
+
+        licenseNumber = std::move(other.licenseNumber);
+        registrationAddress = std::move(other.registrationAddress);
+        UNN = std::move(other.UNN);
+        taxDates = other.taxDates;
+        taxSums = other.taxSums;
+        taxCount = other.taxCount;
+
+        other.taxDates = nullptr;
+        other.taxSums = nullptr;
+        other.taxCount = 0;
+    }
+    return *this;
+}
+
 Entrepreneur::~Entrepreneur()
 {
     delete[] taxDates;
@@ -19,7 +50,7 @@ void Entrepreneur::inputEntrepreneur()
     cin >> UNN;
 
     cout << "Введите количество налоговых платежей: ";
-    cin >> taxCount;
+    taxCount = checkRange(1, 100);
     taxDates = new string[taxCount];
     taxSums = new double[taxCount];
 
@@ -28,7 +59,7 @@ void Entrepreneur::inputEntrepreneur()
         cout << "  Дата платежа: ";
         cin >> taxDates[i];
         cout << "  Сумма: ";
-        cin >> taxSums[i];
+        taxSums[i] = checkRange(0.0f, 1000000.0f);
     }
 }
 
@@ -56,7 +87,7 @@ void Entrepreneur::fillTestData()
 
 void Entrepreneur::printEntrepreneur() const
 {
-        cout << "Лицензия: " << licenseNumber
+    cout << "Лицензия: " << licenseNumber
          << ", Адрес регистрации: " << registrationAddress
          << ", УНН: " << UNN << endl;
     for (int i = 0; i < taxCount; i++)

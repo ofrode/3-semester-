@@ -2,6 +2,35 @@
 
 using namespace std;
 
+Tourist::Tourist(Tourist &&other) noexcept : Person(move(other)), passportData(std::move(other.passportData)), crossDates(other.crossDates),
+                                             crossCountries(other.crossCountries), crossCount(other.crossCount)
+{
+    other.crossDates = nullptr;
+    other.crossCountries = nullptr;
+    other.crossCount = 0;
+}
+
+Tourist &Tourist::operator=(Tourist &&other) noexcept
+{
+    if (this != &other)
+    {
+        Person::operator=(std::move(other));
+
+        delete[] crossDates;
+        delete[] crossCountries;
+
+        passportData = std::move(other.passportData);
+        crossDates = other.crossDates;
+        crossCountries = other.crossCountries;
+        crossCount = other.crossCount;
+
+        other.crossDates = nullptr;
+        other.crossCountries = nullptr;
+        other.crossCount = 0;
+    }
+    return *this;
+}
+
 Tourist::~Tourist()
 {
     delete[] crossDates;
@@ -20,7 +49,7 @@ void Tourist::inputTourist()
     cin >> passportData;
 
     cout << "Введите количество пересечений границы: ";
-    cin >> crossCount;
+    crossCount = checkRange(1,100);
     crossDates = new string[crossCount];
     crossCountries = new string[crossCount];
 

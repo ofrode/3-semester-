@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <span>
-#include "check.h"
+#include "../../Laba 1/headers/check.h"
 #include "Person.h"
 #include "Tourist.h"
 #include "Entrepreneur.h"

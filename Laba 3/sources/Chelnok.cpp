@@ -2,16 +2,28 @@
 
 using namespace std;
 
-Chelnok::Chelnok(const std::string *addresses, int count) : addrCount(count)
+Chelnok::Chelnok(Chelnok &&other) noexcept : Entrepreneur(std::move(other)), Tourist(std::move(other)), purchaseAddresses(other.purchaseAddresses), addrCount(other.addrCount)
 {
-    if (count > 0 && addresses)
+    other.purchaseAddresses = nullptr;
+    other.addrCount = 0;
+}
+
+Chelnok &Chelnok::operator=(Chelnok &&other) noexcept
+{
+    if (this != &other)
     {
-        purchaseAddresses = new std::string[count];
-        for (int i = 0; i < count; ++i)
-        {
-            purchaseAddresses[i] = addresses[i];
-        }
+        Entrepreneur::operator=(std::move(other));
+        Tourist::operator=(std::move(other));
+
+        delete[] purchaseAddresses;
+
+        purchaseAddresses = other.purchaseAddresses;
+        addrCount = other.addrCount;
+
+        other.purchaseAddresses = nullptr;
+        other.addrCount = 0;
     }
+    return *this;
 }
 
 Chelnok::~Chelnok()
@@ -22,7 +34,7 @@ Chelnok::~Chelnok()
 void Chelnok::inputChelnok()
 {
     cout << "Введите количество адресов покупок: ";
-    cin >> addrCount;
+    addrCount = checkRange(1,100);
     cin.ignore();
     purchaseAddresses = new string[addrCount];
     for (int i = 0; i < addrCount; i++)

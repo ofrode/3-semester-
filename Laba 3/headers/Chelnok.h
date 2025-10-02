@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <string>
-#include "check.h"
+#include <utility>
+#include "../../Laba 1/headers/check.h"
 #include "Person.h"
 #include "Tourist.h"
 #include "Entrepreneur.h"
@@ -14,19 +15,9 @@ private:
     int addrCount = 0;
 
 public:
-    Chelnok() = default;
-    Chelnok(const std::string *addresses, int count);
-    Chelnok(const Chelnok &other): Entrepreneur(other),Tourist(other),addrCount(other.addrCount)
-    {
-        if (addrCount > 0)
-        {
-            purchaseAddresses = new std::string[addrCount];
-            for (int i = 0; i < addrCount; ++i)
-            {
-                purchaseAddresses[i] = other.purchaseAddresses[i];
-            }
-        }
-    }
+    Chelnok &operator=(const Chelnok &other) = delete;
+    Chelnok(Chelnok &&other) noexcept;
+    Chelnok &operator=(Chelnok &&other) noexcept;
     ~Chelnok() override;
 
     void inputChelnok();

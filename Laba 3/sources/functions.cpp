@@ -23,7 +23,7 @@ Person *createPerson()
     }
     else if (type == 3)
     {
-        p = static_cast<Entrepreneur*>(new Chelnok());;
+        p = static_cast<Entrepreneur*>(new Chelnok());
     }
     else
     {
@@ -33,7 +33,7 @@ Person *createPerson()
 
     int choice;
     cout << "1 - Ввести вручную, 2 - Использовать тестовые данные: ";
-    cin >> choice;
+    choice = checkRange(1, 2);
 
     if (choice == 2)
     {
@@ -76,7 +76,7 @@ void addPerson(Person **&people, int &count)
 
 void printAll(span<Person*> people)
 {
-    for (auto* person : people) {
+    for (auto* const person : people) {
         if (person != nullptr) {
             person->printInfo();
             cout << "\n";

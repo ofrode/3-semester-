@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <string>
-#include "check.h"
+#include <utility>
+#include "../../Laba 1/headers/check.h"
 #include "Person.h"
 
 class Entrepreneur : public Person
@@ -17,27 +18,15 @@ private:
     int taxCount = 0;
 
 public:
-    Entrepreneur() = default;
-    Entrepreneur(const Entrepreneur &other) : Person(other), licenseNumber(other.licenseNumber), registrationAddress(other.registrationAddress),
-                                              UNN(other.UNN), taxCount(other.taxCount)
-    {
-        if (taxCount > 0)
-        {
-            taxDates = new std::string[taxCount];
-            taxSums = new double[taxCount];
+    Entrepreneur &operator=(const Entrepreneur &other) = delete;
+    Entrepreneur(Entrepreneur &&other) noexcept;
+    Entrepreneur &operator=(Entrepreneur &&other) noexcept;
 
-            for (int i = 0; i < taxCount; ++i)
-            {
-                taxDates[i] = other.taxDates[i];
-                taxSums[i] = other.taxSums[i];
-            }
-        }
-    }
     ~Entrepreneur() override;
 
     virtual void inputEntrepreneur();
-    virtual void input() override;
-    virtual void fillTestData() override;
+    void input() override;
+    void fillTestData() override;
     virtual void printEntrepreneur() const;
-    virtual void printInfo() const override;
+    void printInfo() const override;
 };

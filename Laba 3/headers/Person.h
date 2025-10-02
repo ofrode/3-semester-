@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <string>
-#include "check.h"
+#include <utility>
+#include "../../Laba 1/headers/check.h"
 
 class Person
 {
