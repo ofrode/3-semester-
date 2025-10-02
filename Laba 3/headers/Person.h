@@ -16,12 +16,15 @@ private:
 
 public:
     Person() = default;
-    Person(Person &other) = default;
-    Person& operator=(const Person&& other) noexcept;
+    Person(const Person &other) = default;
+    Person(Person&& other) noexcept = default;
+
+    Person& operator=(const Person& other) = default;
+    Person& operator=(Person&& other) noexcept = default;
     
     virtual void input();
     virtual void fillTestData();
     virtual void printInfo() const;
 
-    virtual ~Person() = default;
+    ~Person() = default;
 };
