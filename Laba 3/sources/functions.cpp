@@ -67,7 +67,7 @@ void addPerson(Person **&people, int &count)
     for (int i = 0; i < count; i++)
         temp[i] = people[i];
     delete[] people;
-    people = temp;
+    people = temp; 
 
     cout << "\n--- Ввод данных нового человека ---\n";
     people[count] = createPerson();
