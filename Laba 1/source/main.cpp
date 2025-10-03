@@ -36,11 +36,6 @@ int main()
                 delete[] employees;
             }
             return 0;
-        default:
-            delete[] employees;
-            cout << "\nОшибка\n";
-            system("pause");
-            return 0;
         }
     }
 }

@@ -18,7 +18,7 @@ public:
     Chelnok &operator=(const Chelnok &other) = delete;
     Chelnok(Chelnok &&other) noexcept;
     Chelnok &operator=(Chelnok &&other) noexcept;
-    ~Chelnok() override;
+    ~Chelnok();
 
     void inputChelnok();
     void input() override;

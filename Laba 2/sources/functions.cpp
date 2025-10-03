@@ -11,7 +11,7 @@ void clearInputBuffer()
 int menu()
 {
     int choice;
-    cout << "\n1 - Ввести первую строку\n";
+    cout << "\n1 - Ввести первую строку и вторую строку\n";
     cout << "2 - Сложить строки\n";
     cout << "3 - Сложить строку саму с собой\n";
     cout << "4 - Выход\n";
@@ -41,6 +41,7 @@ void inputString(String &str1, String &str2)
     int choice;
     cout << "\nВведите первую строку: ";
     cin >> str1;
+    clearInputBuffer();
 
     cout << "\nВы хотите скопировать первую строку (1) или написать что-то другое (2): ";
     cin >> choice;

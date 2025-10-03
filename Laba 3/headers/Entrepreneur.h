@@ -22,7 +22,7 @@ public:
     Entrepreneur(Entrepreneur &&other) noexcept;
     Entrepreneur &operator=(Entrepreneur &&other) noexcept;
 
-    ~Entrepreneur() override;
+    ~Entrepreneur();
 
     virtual void inputEntrepreneur();
     void input() override;

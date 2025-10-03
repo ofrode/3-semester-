@@ -26,8 +26,8 @@ public:
 
     friend std::istream &operator>>(std::istream &is, String &s)
     {
-        char buffer[1024];
-        is.getline(buffer, 1024);
+        char buffer[10];
+        is.getline(buffer, 10);
         s = String(buffer);
         return is;
     }

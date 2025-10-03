@@ -20,7 +20,7 @@ public:
     Tourist(Tourist &&other) noexcept;
     Tourist &operator=(Tourist &&other) noexcept;
 
-    ~Tourist() override;
+    ~Tourist();
 
     void input() override;
     virtual void inputTourist();
