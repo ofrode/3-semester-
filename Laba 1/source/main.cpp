@@ -36,6 +36,8 @@ int main()
                 delete[] employees;
             }
             return 0;
+        default:
+            cout << "Ошибка\n";
         }
     }
 }
