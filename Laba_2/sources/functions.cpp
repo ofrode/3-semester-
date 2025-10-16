@@ -56,6 +56,7 @@ void inputString(String &str1, String &str2)
     {
         cout << "\nВведите вторую строку: ";
         cin >> str2;
+        clearInputBuffer();
     }
     cout << "\nСтроки введены!!!\nВведите Enter для продолжения";
 }

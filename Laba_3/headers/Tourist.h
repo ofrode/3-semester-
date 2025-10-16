@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
-#include "../../Laba 1/headers/check.h"
+#include "../../Laba_1/headers/check.h"
 #include "Person.h"
 
 class Tourist : public Person
