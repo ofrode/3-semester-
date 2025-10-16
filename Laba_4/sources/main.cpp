@@ -8,7 +8,7 @@
 int main()
 {
     Worker **workers = nullptr;
-    int count = 0;
+    size_t count = 0;
 
     int choice;
     while (true)
@@ -26,15 +26,15 @@ int main()
             addWorker(&workers, count);
             break;
         case 2:
-            showWorkers(workers, count);
+            showWorkers({workers, count});
             break;
         case 0:
             deleteAll(workers, count);
             delete[] workers;
             return 0;
-            break;
         default:
             std::cout << "Неверный выбор.\n";
+            break;
         }
     }
 }

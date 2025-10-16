@@ -2,7 +2,7 @@
 
 Worker::Worker(const std::string& name) : name(name) {}
 
-void Worker::setName(const std::string& newName) {
+void Worker::setName(std::string_view newName) {
     name = newName;
 }
 

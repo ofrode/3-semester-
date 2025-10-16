@@ -3,13 +3,13 @@
 #include <iostream>
 #include <limits>
 
-void addWorker(Worker ***workers, int &count)
+void addWorker(Worker ***workers, size_t &count)
 {
     int type;
     std::cout << "\n1. Почасовой\n2. Штатный\n3. С процентом\nВаш выбор: ";
     type = checkRange(1, 3);
 
-    Worker **newArr = new Worker *[count + 1];
+    auto newArr = new Worker *[count + 1];
 
     for (int i = 0; i < count; ++i)
         newArr[i] = (*workers)[i];
@@ -39,21 +39,22 @@ void addWorker(Worker ***workers, int &count)
     (*workers)[count++] = newWorker;
 }
 
-void showWorkers(Worker **workers, int count)
+void showWorkers(std::span<Worker*> workers)
 {
-    if (count == 0)
+    if (workers.empty())
     {
         std::cout << "Нет работников.\n";
         return;
     }
-    for (int i = 0; i < count; ++i)
+    
+    for (size_t i = 0; i < workers.size(); ++i)
     {
         std::cout << "\nРаботник #" << (i + 1) << ":\n";
         workers[i]->printInfo();
     }
 }
 
-void deleteAll(Worker **workers, int count)
+void deleteAll(Worker **workers, size_t count)
 {
     for (int i = 0; i < count; ++i)
         delete workers[i];

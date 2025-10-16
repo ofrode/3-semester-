@@ -12,7 +12,7 @@ public:
     explicit Worker(const std::string& name = "");
     virtual ~Worker() = default;
 
-    void setName(const std::string& newName);
+    void setName(std::string_view newName);
     std::string getName() const;
 
     virtual double calculateSalary() const = 0;
