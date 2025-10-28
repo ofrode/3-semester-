@@ -39,14 +39,14 @@ void addWorker(Worker ***workers, size_t &count)
     (*workers)[count++] = newWorker;
 }
 
-void showWorkers(std::span<Worker*> workers)
+void showWorkers(std::span<Worker *> workers)
 {
     if (workers.empty())
     {
         std::cout << "Нет работников.\n";
         return;
     }
-    
+
     for (size_t i = 0; i < workers.size(); ++i)
     {
         std::cout << "\nРаботник #" << (i + 1) << ":\n";

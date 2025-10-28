@@ -4,12 +4,13 @@
 #include <string>
 #include <iostream>
 
-class Worker {
+class Worker
+{
 private:
     std::string name;
 
 public:
-    explicit Worker(const std::string& name = "");
+    explicit Worker(const std::string &name = "");
     virtual ~Worker() = default;
 
     void setName(std::string_view newName);
