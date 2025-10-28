@@ -1,15 +1,12 @@
 #include "../header/LinkedList.h"
 
 template <typename T>
-LinkedList<T>::LinkedList() : head(nullptr), size(0) {}
-
-template <typename T>
 LinkedList<T>::~LinkedList() { clear(); }
 
 template <typename T>
 void LinkedList<T>::pushFront(const T &value)
 {
-    Node<T> *node = new Node<T>(value);
+    auto node = new Node<T>(value);
     node->next = head;
     head = node;
     ++size;

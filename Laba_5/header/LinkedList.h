@@ -7,12 +7,15 @@
 template <typename T>
 class LinkedList {
 private:
-    Node<T>* head;
-    size_t size;
+    Node<T>* head = nullptr;
+    size_t size = 0;
 
 public:
-    LinkedList();
+    LinkedList() = default;
     ~LinkedList();
+
+    LinkedList(const LinkedList&) = delete;
+    LinkedList& operator=(const LinkedList&) = delete;
 
     void pushFront(const T& value);
     void popFront();
