@@ -41,9 +41,9 @@ void handleChoice(int choice, Person *&current)
         menuTourist(current);
         break;
     case 4:
-        current = new Shuttler();
+        current = new Chelnok();
         current->inputData();
-        menuShuttler(current);
+        menuChelnok(current);
         break;
     case 0:
         break;
@@ -211,12 +211,12 @@ void menuTourist(Person *&current)
     } while (choice != 0);
 }
 
-void menuShuttler(Person *&current)
+void menuChelnok(Person *&current)
 {
     if (current == nullptr)
         return;
 
-    auto *s = dynamic_cast<Shuttler *>(current);
+    auto *s = dynamic_cast<Chelnok *>(current);
     if (!s)
         return;
 

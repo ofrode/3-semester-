@@ -12,4 +12,4 @@ void handleChoice(int choice, Person*& current);
 void menuPerson(Person*& current);
 void menuEntrepreneur(Person*& current);
 void menuTourist(Person*& current);
-void menuShuttler(Person*& current);
+void menuChelnok(Person*& current);

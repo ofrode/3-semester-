@@ -4,7 +4,7 @@
 #include <string>
 #include <string_view>
 
-class Shuttler : public Entrepreneur, public Tourist {
+class Chelnok : public Entrepreneur, public Tourist {
 private:
     std::string* shoppingAddresses{nullptr};
     std::string inputShoppingAddress(int index) const;
@@ -14,13 +14,13 @@ private:
     void ensureCapacity();
 
 public:
-    Shuttler();
-    ~Shuttler() override;
+    Chelnok();
+    ~Chelnok() override;
 
-    Shuttler(const Shuttler& other);
-    Shuttler& operator=(const Shuttler& other);
-    Shuttler(Shuttler&& other) noexcept;
-    Shuttler& operator=(Shuttler&& other) noexcept;
+    Chelnok(const Chelnok& other);
+    Chelnok& operator=(const Chelnok& other);
+    Chelnok(Chelnok&& other) noexcept;
+    Chelnok& operator=(Chelnok&& other) noexcept;
 
     void addShoppingAddress(std::string_view address);
     void printShoppingAddresses() const;

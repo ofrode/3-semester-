@@ -6,13 +6,13 @@
 
 using namespace std;
 
-Shuttler::Shuttler() : Person(), Entrepreneur(), Tourist() {}
+Chelnok::Chelnok() : Person(), Entrepreneur(), Tourist() {}
 
-Shuttler::~Shuttler() {
+Chelnok::~Chelnok() {
     delete[] shoppingAddresses;
 }
 
-Shuttler::Shuttler(const Shuttler& other)
+Chelnok::Chelnok(const Chelnok& other)
     : Person(other),
       Entrepreneur(other),
       Tourist(other),
@@ -26,7 +26,7 @@ Shuttler::Shuttler(const Shuttler& other)
     }
 }
 
-Shuttler& Shuttler::operator=(const Shuttler& other) {
+Chelnok& Chelnok::operator=(const Chelnok& other) {
     if (this == &other) return *this;
     Entrepreneur::operator=(other);
     Tourist::operator=(other);
@@ -44,7 +44,7 @@ Shuttler& Shuttler::operator=(const Shuttler& other) {
     return *this;
 }
 
-Shuttler::Shuttler(Shuttler&& other) noexcept
+Chelnok::Chelnok(Chelnok&& other) noexcept
     : Person(std::move(other)),
       Entrepreneur(std::move(other)),
       Tourist(std::move(other)),
@@ -56,7 +56,7 @@ Shuttler::Shuttler(Shuttler&& other) noexcept
     other.shopCapacity = 0;
 }
 
-Shuttler& Shuttler::operator=(Shuttler&& other) noexcept {
+Chelnok& Chelnok::operator=(Chelnok&& other) noexcept {
     if (this == &other) return *this;
     Entrepreneur::operator=(std::move(other));
     Tourist::operator=(std::move(other));
@@ -70,7 +70,7 @@ Shuttler& Shuttler::operator=(Shuttler&& other) noexcept {
     return *this;
 }
 
-void Shuttler::ensureCapacity() {
+void Chelnok::ensureCapacity() {
     int newCapacity = (shopCapacity == 0 ? 2 : shopCapacity * 2);
     auto* newArr = new string[newCapacity];
     for (int i = 0; i < shopCount; i++) {
@@ -81,7 +81,7 @@ void Shuttler::ensureCapacity() {
     shopCapacity = newCapacity;
 }
 
-void Shuttler::addShoppingAddress(std::string_view address) {
+void Chelnok::addShoppingAddress(std::string_view address) {
     while (shopCount >= shopCapacity) {
         ensureCapacity();
     }
@@ -89,14 +89,14 @@ void Shuttler::addShoppingAddress(std::string_view address) {
     shoppingAddresses[shopCount - 1] = string(address);
 }
 
-void Shuttler::printShoppingAddresses() const {
+void Chelnok::printShoppingAddresses() const {
     cout << "Shopping addresses:\n";
     for (int i = 0; i < shopCount; i++) {
         cout << "- " << shoppingAddresses[i] << endl;
     }
 }
 
-string Shuttler::inputShoppingAddress(int index) const {
+string Chelnok::inputShoppingAddress(int index) const {
     while (true) {
         try {
             return inputStr(std::format("Address {}: ", index + 1));
@@ -110,7 +110,7 @@ string Shuttler::inputShoppingAddress(int index) const {
     }
 }
 
-void Shuttler::inputData() {
+void Chelnok::inputData() {
     while (true) {
         try {
             Entrepreneur::inputData();
@@ -133,7 +133,7 @@ void Shuttler::inputData() {
     }
 }
 
-void Shuttler::printInfo() const {
+void Chelnok::printInfo() const {
     cout << "\nЧелнок\n";
     Person::printInfo();
     cout << "Лицензия: " << getLicenseNumber()
