@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 
-class Date {
+class Date
+{
 private:
     int day;
     int month;
