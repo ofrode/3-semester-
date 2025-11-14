@@ -44,10 +44,10 @@ static int inputPositiveIntSafely(const string& pt) {
     while (true) {
         try {
             return inputPosInt(pt);
-        } catch (const invalid_argument& ex) {
-            cout << "Неизвестный аргумент: " << ex.what() << ". Попробуйте еще.\n";
-        } catch (const out_of_range& ex) {
-            cout << "Вышел за ограничения: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const system_error& ex) {
             cout << "Ошибка в системе: " << ex.what() << ". Попробуйте еще.\n";
         }
@@ -68,10 +68,10 @@ void Date::inputDate() {
             month = m;
             year = y;
             break;
-        } catch (const invalid_argument& e) {
-            cout << "Неизвестный аргумент: " << e.what() << ". Попробуйте еще.\n";
-        } catch (const out_of_range& e) {
-            cout << "Вышел за ограничения: " << e.what() << ". Попробуйте еще.\n";
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const system_error& e) {
             cout << "Ошибка в системе: " << e.what() << ". Попробуйте еще.\n";
         }

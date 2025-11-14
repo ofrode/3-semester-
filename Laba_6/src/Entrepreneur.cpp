@@ -83,10 +83,10 @@ static int inputPositiveIntSafely(const string& pt) {
     while (true) {
         try {
             return inputPosInt(pt);
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const InputError& ex) {
-            cout << "Неизвестный аргумент: " << ex.what() << ". Попробуйте еще.\n";
-        } catch (const out_of_range& ex) {
-            cout << "Вышел за ограничения: " << ex.what() << ". Попробуйте еще.\n";
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const system_error& ex) {
             cout << "Ошибка в системе: " << ex.what() << ". Попробуйте еще.\n";
         }
@@ -97,10 +97,10 @@ static string inputLineSafely(const string& pt) {
     while (true) {
         try {
             return inputStr(pt);
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const InputError& ex) {
-            cout << "Неизвестный аргумент: " << ex.what() << ". Попробуйте еще.\n";
-        } catch (const out_of_range& ex) {
-            cout << "Вышел за ограничения: " << ex.what() << ". Попробуйте еще.\n";
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const system_error& ex) {
             cout << "Ошибка в системе: " << ex.what() << ". Попробуйте еще.\n";
         }
@@ -115,10 +115,10 @@ void Entrepreneur::inputData() {
             registrationAddress = inputLineSafely("Введите адресс регистрации: ");
             inn = inputPositiveIntSafely("Введите ИНН: ");
             break;
-        } catch (const InputError& e) {
-            cout << "Неизвестный аргумент: " << e.what() << ". Попробуйте еще.\n";
-        } catch (const out_of_range& e) {
-            cout << "Вышел за ограничения: " << e.what() << ". Попробуйте еще.\n";
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         } catch (const system_error& e) {
             cout << "Ошибка в системе: " << e.what() << ". Попробуйте еще.\n";
         }

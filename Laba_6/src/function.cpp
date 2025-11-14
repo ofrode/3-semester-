@@ -78,18 +78,16 @@ void menuPerson(Person *&current)
                 cout << "Неправильный выбор.\n";
             }
         }
-        catch (const InputError &e)
-        {
-            cout << "Неизвестный аргумент: " << e.what() << "\nПопробуйте еще.\n";
-        }
-        catch (const out_of_range &e)
-        {
-            cout << "Вышел за ограничения: " << e.what() << "\nПопробуйте еще.\n";
+        catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         }
         catch (const system_error &e)
         {
             cout << "Ошибка в системе: " << e.what() << "\nПопробуйте еще.\n";
         }
+
     } while (choice != 0);
 }
 
@@ -136,14 +134,10 @@ void menuEntrepreneur(Person *&current)
             default:
                 cout << "Неправильный выбор.\n";
             }
-        }
-        catch (const InputError &e)
-        {
-            cout << "Неизвестный аргумент: " << e.what() << "\nПопробуйте еще.\n";
-        }
-        catch (const out_of_range &e)
-        {
-            cout << "Вышел за ограничения: " << e.what() << "\nПопробуйте еще.\n";
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         }
         catch (const system_error &e)
         {
@@ -195,14 +189,10 @@ void menuTourist(Person *&current)
             default:
                 cout << "Неправильный выбор.\n";
             }
-        }
-        catch (const InputError &e)
-        {
-            cout << "Неизвестный аргумент: " << e.what() << "\nПопробуйте еще.\n";
-        }
-        catch (const out_of_range &e)
-        {
-            cout << "Вышел за ограничения: " << e.what() << "\nПопробуйте еще.\n";
+       } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         }
         catch (const system_error &e)
         {
@@ -279,14 +269,10 @@ void menuChelnok(Person *&current)
             default:
                 cout << "Неправильный выбор.\n";
             }
-        }
-        catch (const InputError &e)
-        {
-            cout << "Неизвестный аргумент: " << e.what() << "\nПопробуйте еще.\n";
-        }
-        catch (const out_of_range &e)
-        {
-            cout << "Вышел за ограничения: " << e.what() << "\nПопробуйте еще.\n";
+        } catch (const InputOutOfRange& ex) {
+            cout << "Вышел за ограничение: " << ex.what() << ". Попробуйте еще.\n";
+        } catch (const InputError& ex) {
+            cout << "Не INT: " << ex.what() << ". Попробуйте еще.\n";
         }
         catch (const system_error &e)
         {

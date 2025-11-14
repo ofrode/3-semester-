@@ -14,10 +14,10 @@ int main() {
             showMainMenu();
             choice = inputInt("Ваш выбор: ");
             handleChoice(choice, current);
-        } catch (const InputError& e) {
-            cout << "Неизвестный аргумент: " << e.what() << "\nПопробуйте еще.\n";
-        } catch (const out_of_range& e) {
+        } catch (const InputOutOfRange& e) {
             cout << "Вышел за ограничения: " << e.what() << "\nПопробуйте еще.\n";
+        } catch (const InputError& e) {
+            cout << "Не INT: " << e.what() << "\nПопробуйте еще.\n";
         } catch (const system_error& e) {
             cout << "Ошибка в системе: " << e.what() << "\nПопробуйте еще.\n";
         }
@@ -29,5 +29,4 @@ int main() {
     }
     
     return 0;
-    
 }

@@ -1,10 +1,7 @@
 #pragma once
 #include <stdexcept>
 #include <string>
-
-class InputError : public std::runtime_error {
-    using std::runtime_error::runtime_error;
-};
+#include "InputOutOfRangeException.h"
 
 
 int inputInt(const std::string &pt);

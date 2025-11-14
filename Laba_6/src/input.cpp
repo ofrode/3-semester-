@@ -37,7 +37,7 @@ int inputInt(const string &pt) {
     } catch (const invalid_argument &) {
         throw InputError(std::format("Не целочисленный ввод: '{}'", input));
     } catch (const out_of_range &) {
-        throw InputError(std::format("Выход за границы: '{}'", input));
+        throw InputOutOfRange(std::format("Выход за границы: '{}'", input));
     }
 }
 
