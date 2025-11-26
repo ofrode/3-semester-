@@ -1,16 +1,17 @@
 #include "../hdr/DoublyLinkedList.h"
 #include <string>
 
-// Реализация методов для DoublyLinkedList
+template <typename T>
+void DoublyLinkedList<T>::push_back(const T &value)
+{
+    auto *newNode = new Node<T>(value);
 
-template<typename T>
-void DoublyLinkedList<T>::push_back(const T& value) {
-    auto* newNode = new Node<T>(value);
-    
-    if (tail == nullptr) {
-        // Список пуст
+    if (tail == nullptr)
+    {
         head = tail = newNode;
-    } else {
+    }
+    else
+    {
         tail->next = newNode;
         newNode->prev = tail;
         tail = newNode;
@@ -18,14 +19,17 @@ void DoublyLinkedList<T>::push_back(const T& value) {
     size++;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::push_front(const T& value) {
-    auto* newNode = new Node<T>(value);
-    
-    if (head == nullptr) {
-        // Список пуст
+template <typename T>
+void DoublyLinkedList<T>::push_front(const T &value)
+{
+    auto *newNode = new Node<T>(value);
+
+    if (head == nullptr)
+    {
         head = tail = newNode;
-    } else {
+    }
+    else
+    {
         head->prev = newNode;
         newNode->next = head;
         head = newNode;
@@ -33,17 +37,21 @@ void DoublyLinkedList<T>::push_front(const T& value) {
     size++;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::pop_back() {
-    if (tail == nullptr) {
+template <typename T>
+void DoublyLinkedList<T>::pop_back()
+{
+    if (tail == nullptr)
+    {
         return;
     }
-    
-    Node<T>* temp = tail;
-    if (tail == head) {
-        // Один элемент
+
+    Node<T> *temp = tail;
+    if (tail == head)
+    {
         head = tail = nullptr;
-    } else {
+    }
+    else
+    {
         tail = tail->prev;
         tail->next = nullptr;
     }
@@ -51,17 +59,21 @@ void DoublyLinkedList<T>::pop_back() {
     size--;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::pop_front() {
-    if (head == nullptr) {
+template <typename T>
+void DoublyLinkedList<T>::pop_front()
+{
+    if (head == nullptr)
+    {
         return;
     }
-    
-    Node<T>* temp = head;
-    if (head == tail) {
-        // Один элемент
+
+    Node<T> *temp = head;
+    if (head == tail)
+    {
         head = tail = nullptr;
-    } else {
+    }
+    else
+    {
         head = head->next;
         head->prev = nullptr;
     }
@@ -69,21 +81,22 @@ void DoublyLinkedList<T>::pop_front() {
     size--;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::insert(Iterator<T> pos, const T& value) {
-    if (pos.current == nullptr) {
-        // Вставка в конец
+template <typename T>
+void DoublyLinkedList<T>::insert(Iterator<T> pos, const T &value)
+{
+    if (pos.current == nullptr)
+    {
         push_back(value);
         return;
     }
-    
-    if (pos.current == head) {
-        // Вставка в начало
+
+    if (pos.current == head)
+    {
         push_front(value);
         return;
     }
-    
-    auto* newNode = new Node<T>(value);
+
+    auto *newNode = new Node<T>(value);
     newNode->next = pos.current;
     newNode->prev = pos.current->prev;
     pos.current->prev->next = newNode;
@@ -91,32 +104,38 @@ void DoublyLinkedList<T>::insert(Iterator<T> pos, const T& value) {
     size++;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::erase(Iterator<T> pos) {
-    if (pos.current == nullptr) {
+template <typename T>
+void DoublyLinkedList<T>::erase(Iterator<T> pos)
+{
+    if (pos.current == nullptr)
+    {
         return;
     }
-    
-    if (pos.current == head) {
+
+    if (pos.current == head)
+    {
         pop_front();
         return;
     }
-    
-    if (pos.current == tail) {
+
+    if (pos.current == tail)
+    {
         pop_back();
         return;
     }
-    
+
     pos.current->prev->next = pos.current->next;
     pos.current->next->prev = pos.current->prev;
     delete pos.current;
     size--;
 }
 
-template<typename T>
-void DoublyLinkedList<T>::clear() {
-    while (head != nullptr) {
-        Node<T>* temp = head;
+template <typename T>
+void DoublyLinkedList<T>::clear()
+{
+    while (head != nullptr)
+    {
+        Node<T> *temp = head;
         head = head->next;
         delete temp;
     }
@@ -124,8 +143,6 @@ void DoublyLinkedList<T>::clear() {
     size = 0;
 }
 
-// Явное инстанцирование для часто используемых типов
 template class DoublyLinkedList<int>;
 template class DoublyLinkedList<double>;
 template class DoublyLinkedList<std::string>;
-
