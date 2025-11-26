@@ -3,19 +3,15 @@
 
 #include <string>
 
-// Узел двухсвязного списка
-template<typename T>
-class Node {
+template <typename T>
+class Node
+{
 public:
     T data;
-    Node* next = nullptr;
-    Node* prev = nullptr;
+    Node *next;
+    Node *prev;
 
-    explicit Node(const T& value);
+    explicit Node(const T &value);
 };
 
-// Включение реализации шаблонов
-#include "../src/Node.cpp"
-
-#endif // NODE_H
-
+#endif

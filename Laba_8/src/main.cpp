@@ -1,6 +1,7 @@
 #include "../hdr/Menu.h"
 
-int main() {
+int main()
+{
     Menu::run();
     return 0;
 }
