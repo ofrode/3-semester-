@@ -10,7 +10,7 @@ void Menu::printList(DoublyLinkedList<int> &list)
     }
     else
     {
-        for (Iterator<int> it = list.begin(); it != list.end(); ++it)
+        for (auto it = list.begin(); it != list.end(); ++it)
         {
             std::cout << *it << " ";
         }
@@ -270,7 +270,7 @@ void Menu::deleteElement(DoublyLinkedList<int> &list)
         }
 
         bool found = false;
-        for (Iterator<int> it = list.begin(); it != list.end(); ++it)
+        for (auto it = list.begin(); it != list.end(); ++it)
         {
             if (*it == value)
             {
@@ -305,9 +305,10 @@ void Menu::deleteElement(DoublyLinkedList<int> &list)
             return;
         }
 
-        Iterator<int> it = list.begin();
-        for (int i = 0; i < pos && it != list.end(); ++i, ++it)
+        auto it = list.begin();
+        for (int i = 0; i < pos && it != list.end(); ++i)
         {
+            ++it;
         }
 
         if (it != list.end())
@@ -369,7 +370,7 @@ void Menu::demonstrateListOperations()
     printList(list);
 
     std::cout << "\n2. Вставка элемента 15 после первого элемента:" << std::endl;
-    Iterator<int> it = list.begin();
+    auto it = list.begin();
     ++it;
     list.insert(it, 15);
     printList(list);
@@ -394,7 +395,7 @@ void Menu::demonstrateIterator()
     list.push_back(40);
 
     std::cout << "\nОбход списка вперед:" << std::endl;
-    for (Iterator<int> it = list.begin(); it != list.end(); ++it)
+    for (auto it = list.begin(); it != list.end(); ++it)
     {
         std::cout << *it << " ";
     }
@@ -404,11 +405,11 @@ void Menu::demonstrateIterator()
     if (!list.empty())
     {
         DoublyLinkedList<int> reverseList;
-        for (Iterator<int> it = list.begin(); it != list.end(); ++it)
+        for (auto it = list.begin(); it != list.end(); ++it)
         {
             reverseList.push_front(*it);
         }
-        for (Iterator<int> it = reverseList.begin(); it != reverseList.end(); ++it)
+        for (auto it = reverseList.begin(); it != reverseList.end(); ++it)
         {
             std::cout << *it << " ";
         }
