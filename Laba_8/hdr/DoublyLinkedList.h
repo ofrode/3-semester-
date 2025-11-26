@@ -59,15 +59,8 @@ public:
         return temp;
     }
 
-    bool operator==(const Iterator &other) const
-    {
-        return current == other.current;
-    }
+    bool operator==(const Iterator &other) const = default;
 
-    bool operator!=(const Iterator &other) const
-    {
-        return !(*this == other);
-    }
 
     friend class DoublyLinkedList<T>;
 };
@@ -159,5 +152,6 @@ public:
 };
 
 #include "../src/DoublyLinkedList.cpp"
+
 
 #endif
