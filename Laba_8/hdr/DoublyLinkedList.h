@@ -153,5 +153,4 @@ public:
 
 #include "../src/DoublyLinkedList.cpp"
 
-
 #endif
