@@ -5,7 +5,7 @@
 // Примечание: бинарный поиск на связном списке неэффективен из-за отсутствия произвольного доступа
 // Реализована упрощенная версия для демонстрации
 template<typename T>
-Iterator<T> Algorithms<T>::binarySearch(DoublyLinkedList<T>& list, const T& value) {
+Iterator<T> Algorithms<T>::binarySearch(const DoublyLinkedList<T>& list, const T& value) {
     if (list.empty()) {
         return list.end();
     }

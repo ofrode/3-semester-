@@ -62,7 +62,6 @@ public:
         return current == other.current;
     }
     
-    // В C++20 operator!= генерируется из operator==, но для совместимости оставляем явную реализацию
     bool operator!=(const Iterator& other) const {
         return !(*this == other);
     }

@@ -10,7 +10,7 @@ class Algorithms {
 public:
     // Бинарный поиск (требует отсортированный список)
     // Возвращает итератор на найденный элемент или end() если не найден
-    static Iterator<T> binarySearch(DoublyLinkedList<T>& list, const T& value);
+    static Iterator<T> binarySearch(const DoublyLinkedList<T>& list, const T& value);
     
     // Быстрая сортировка
     static void quickSort(DoublyLinkedList<T>& list);

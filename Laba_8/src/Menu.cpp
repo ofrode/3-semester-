@@ -8,8 +8,11 @@ void Menu::printList(const DoublyLinkedList<int>& list) {
     if (list.empty()) {
         std::cout << "(пуст)";
     } else {
-        for (auto it = list.begin(); it != list.end(); ++it) {
+        auto it = list.begin();
+        const auto endIt = list.end();
+        while (it != endIt) {
             std::cout << *it << " ";
+            ++it;
         }
     }
     std::cout << std::endl;
@@ -79,7 +82,7 @@ void Menu::fillListManually(DoublyLinkedList<int>& list) {
     std::cout << "\n=== Заполнение списка вручную ===" << std::endl;
     
     int value;
-    char choice;
+    char choice = ' ';
     
     do {
         std::cout << "Введите число для добавления: ";
@@ -91,7 +94,12 @@ void Menu::fillListManually(DoublyLinkedList<int>& list) {
         }
         
         std::cout << "Добавить в начало (f) или в конец (b)? [f/b]: ";
-        std::cin >> choice;
+        if (!(std::cin >> choice)) {
+            std::cout << "Ошибка ввода!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            choice = ' '; // Инициализируем безопасным значением
+        }
         
         if (choice == 'f' || choice == 'F') {
             list.push_front(value);
@@ -104,7 +112,11 @@ void Menu::fillListManually(DoublyLinkedList<int>& list) {
         printList(list);
         
         std::cout << "\nДобавить еще элемент? [y/n]: ";
-        std::cin >> choice;
+        if (!(std::cin >> choice)) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            choice = 'n'; // По умолчанию выходим из цикла
+        }
     } while (choice == 'y' || choice == 'Y');
     
     std::cout << "\nСписок заполнен!" << std::endl;
@@ -162,7 +174,7 @@ void Menu::sortList(DoublyLinkedList<int>& list) {
 }
 
 // Поиск в списке
-void Menu::searchInList(DoublyLinkedList<int>& list) {
+void Menu::searchInList(const DoublyLinkedList<int>& list) {
     std::cout << "\n=== Поиск в списке ===" << std::endl;
     
     if (list.empty()) {
@@ -186,7 +198,8 @@ void Menu::searchInList(DoublyLinkedList<int>& list) {
         return;
     }
     
-    auto result = Algorithms<int>::binarySearch(sortedList, value);
+    const DoublyLinkedList<int>& constSortedList = sortedList;
+    auto result = Algorithms<int>::binarySearch(constSortedList, value);
     if (result != sortedList.end()) {
         std::cout << "Элемент " << value << " найден в списке!" << std::endl;
     } else {
@@ -223,71 +236,17 @@ void Menu::deleteElement(DoublyLinkedList<int>& list) {
     
     switch (choice) {
         case 1:
-            if (!list.empty()) {
-                const int removed = list.front();
-                list.pop_front();
-                std::cout << "Элемент " << removed << " удален из начала списка." << std::endl;
-            }
+            deleteFirstElement(list);
             break;
         case 2:
-            if (!list.empty()) {
-                const int removed = list.back();
-                list.pop_back();
-                std::cout << "Элемент " << removed << " удален из конца списка." << std::endl;
-            }
+            deleteLastElement(list);
             break;
-        case 3: {
-            int value;
-            std::cout << "Введите значение элемента для удаления: ";
-            if (!(std::cin >> value)) {
-                std::cout << "Ошибка ввода!" << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                return;
-            }
-            
-            bool found = false;
-            for (auto it = list.begin(); it != list.end(); ++it) {
-                if (*it == value) {
-                    list.erase(it);
-                    std::cout << "Элемент " << value << " удален из списка." << std::endl;
-                    found = true;
-                    break;
-                }
-            }
-            
-            if (!found) {
-                std::cout << "Элемент " << value << " не найден в списке." << std::endl;
-            }
+        case 3:
+            deleteByValue(list);
             break;
-        }
-        case 4: {
-            int pos;
-            std::cout << "Введите позицию элемента (начиная с 0): ";
-            if (!(std::cin >> pos)) {
-                std::cout << "Ошибка ввода!" << std::endl;
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                return;
-            }
-            
-            if (pos < 0 || pos >= static_cast<int>(list.getSize())) {
-                std::cout << "Неверная позиция! Размер списка: " << list.getSize() << std::endl;
-                return;
-            }
-            
-            auto it = list.begin();
-            for (int i = 0; i < pos && it != list.end(); ++i) {
-                ++it;
-            }
-            
-            if (it != list.end()) {
-                const int removed = *it;
-                list.erase(it);
-                std::cout << "Элемент " << removed << " на позиции " << pos << " удален." << std::endl;
-            }
+        case 4:
+            deleteByPosition(list);
             break;
-        }
         default:
             std::cout << "Неверный выбор!" << std::endl;
             return;
@@ -295,6 +254,86 @@ void Menu::deleteElement(DoublyLinkedList<int>& list) {
     
     std::cout << "\nСписок после удаления:" << std::endl;
     printList(list);
+}
+
+// Вспомогательная функция: удаление первого элемента
+void Menu::deleteFirstElement(DoublyLinkedList<int>& list) {
+    if (!list.empty()) {
+        const int removed = list.front();
+        list.pop_front();
+        std::cout << "Элемент " << removed << " удален из начала списка." << std::endl;
+    }
+}
+
+// Вспомогательная функция: удаление последнего элемента
+void Menu::deleteLastElement(DoublyLinkedList<int>& list) {
+    if (!list.empty()) {
+        const int removed = list.back();
+        list.pop_back();
+        std::cout << "Элемент " << removed << " удален из конца списка." << std::endl;
+    }
+}
+
+// Вспомогательная функция: удаление по значению
+void Menu::deleteByValue(DoublyLinkedList<int>& list) {
+    int value;
+    std::cout << "Введите значение элемента для удаления: ";
+    if (!(std::cin >> value)) {
+        std::cout << "Ошибка ввода!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+    
+    auto it = list.begin();
+    const auto endIt = list.end();
+    bool found = false;
+    
+    while (it != endIt) {
+        if (*it == value) {
+            list.erase(it);
+            std::cout << "Элемент " << value << " удален из списка." << std::endl;
+            found = true;
+            break;
+        }
+        ++it;
+    }
+    
+    if (!found) {
+        std::cout << "Элемент " << value << " не найден в списке." << std::endl;
+    }
+}
+
+// Вспомогательная функция: удаление по позиции
+void Menu::deleteByPosition(DoublyLinkedList<int>& list) {
+    int pos;
+    std::cout << "Введите позицию элемента (начиная с 0): ";
+    if (!(std::cin >> pos)) {
+        std::cout << "Ошибка ввода!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+    
+    if (pos < 0 || pos >= static_cast<int>(list.getSize())) {
+        std::cout << "Неверная позиция! Размер списка: " << list.getSize() << std::endl;
+        return;
+    }
+    
+    auto it = list.begin();
+    const auto endIt = list.end();
+    int currentPos = 0;
+    
+    while (it != endIt && currentPos < pos) {
+        ++it;
+        ++currentPos;
+    }
+    
+    if (it != endIt) {
+        const int removed = *it;
+        list.erase(it);
+        std::cout << "Элемент " << removed << " на позиции " << pos << " удален." << std::endl;
+    }
 }
 
 // Очистка всего списка
@@ -364,8 +403,11 @@ void Menu::demonstrateIterator() {
     list.push_back(40);
     
     std::cout << "\nОбход списка вперед:" << std::endl;
-    for (auto it = list.begin(); it != list.end(); ++it) {
+    auto it = list.begin();
+    const auto endIt = list.end();
+    while (it != endIt) {
         std::cout << *it << " ";
+        ++it;
     }
     std::cout << std::endl;
     
@@ -373,11 +415,17 @@ void Menu::demonstrateIterator() {
     if (!list.empty()) {
         // Создаем временный список для обратного обхода
         DoublyLinkedList<int> reverseList;
-        for (auto it = list.begin(); it != list.end(); ++it) {
-            reverseList.push_front(*it);
+        auto forwardIt = list.begin();
+        const auto forwardEnd = list.end();
+        while (forwardIt != forwardEnd) {
+            reverseList.push_front(*forwardIt);
+            ++forwardIt;
         }
-        for (auto it = reverseList.begin(); it != reverseList.end(); ++it) {
-            std::cout << *it << " ";
+        auto reverseIt = reverseList.begin();
+        const auto reverseEnd = reverseList.end();
+        while (reverseIt != reverseEnd) {
+            std::cout << *reverseIt << " ";
+            ++reverseIt;
         }
     }
     std::cout << std::endl;
@@ -478,11 +526,13 @@ void Menu::run() {
         } while (choice != 0);
         
         std::cout << "\n=== Программа завершена ===" << std::endl;
+    } catch (const std::bad_alloc& e) {
+        std::cerr << "Ошибка выделения памяти: " << e.what() << std::endl;
+    } catch (const std::ios_base::failure& e) {
+        std::cerr << "Ошибка ввода/вывода: " << e.what() << std::endl;
     } catch (const std::runtime_error& e) {
         std::cerr << "Ошибка выполнения: " << e.what() << std::endl;
     } catch (const std::logic_error& e) {
         std::cerr << "Логическая ошибка: " << e.what() << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Неизвестная ошибка: " << e.what() << std::endl;
     }
 }

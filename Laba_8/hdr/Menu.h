@@ -27,11 +27,17 @@ private:
     static void sortList(DoublyLinkedList<int>& list);
     
     // Поиск в списке
-    static void searchInList(DoublyLinkedList<int>& list);
+    static void searchInList(const DoublyLinkedList<int>& list);
     
     // Удаление из списка
     static void deleteElement(DoublyLinkedList<int>& list);
     static void clearList(DoublyLinkedList<int>& list);
+    
+    // Вспомогательные функции для deleteElement
+    static void deleteFirstElement(DoublyLinkedList<int>& list);
+    static void deleteLastElement(DoublyLinkedList<int>& list);
+    static void deleteByValue(DoublyLinkedList<int>& list);
+    static void deleteByPosition(DoublyLinkedList<int>& list);
     
     // Демонстрация операций со списком
     static void demonstrateListOperations();
