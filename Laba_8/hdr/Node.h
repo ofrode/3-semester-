@@ -1,19 +1,20 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <string>
+
 // Узел двухсвязного списка
 template<typename T>
 class Node {
 public:
     T data;
-    Node* next;
-    Node* prev;
+    Node* next = nullptr;
+    Node* prev = nullptr;
 
-    Node(const T& value);
+    explicit Node(const T& value);
 };
 
 // Включение реализации шаблонов
-#include <string>
 #include "../src/Node.cpp"
 
 #endif // NODE_H

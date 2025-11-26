@@ -13,7 +13,7 @@ public:
     
 private:
     // Печать списка
-    static void printList(DoublyLinkedList<int>& list);
+    static void printList(const DoublyLinkedList<int>& list);
     
     // Интерактивное меню
     static void showMenu();
@@ -47,7 +47,7 @@ private:
 };
 
 // Включение реализации
-#include "../src/menu.cpp"
+#include "../src/Menu.cpp"
 
 #endif // MENU_H
 

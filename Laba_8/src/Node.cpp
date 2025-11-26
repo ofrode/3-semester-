@@ -3,7 +3,7 @@
 
 // Реализация конструктора Node
 template<typename T>
-Node<T>::Node(const T& value) : data(value), next(nullptr), prev(nullptr) {}
+Node<T>::Node(const T& value) : data(value) {}
 
 // Явное инстанцирование для часто используемых типов
 template class Node<int>;

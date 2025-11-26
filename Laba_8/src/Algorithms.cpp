@@ -47,7 +47,7 @@ Iterator<T> Algorithms<T>::binarySearch(DoublyLinkedList<T>& list, const T& valu
 
 // Вспомогательная функция для быстрой сортировки - разделение
 template<typename T>
-Iterator<T> Algorithms<T>::partition(DoublyLinkedList<T>& list, Iterator<T> low, Iterator<T> high, std::function<bool(const T&, const T&)> compare) {
+Iterator<T> Algorithms<T>::partition([[maybe_unused]] DoublyLinkedList<T>& list, Iterator<T> low, Iterator<T> high, std::function<bool(const T&, const T&)> compare) {
     T pivot = *high;
     Iterator<T> i = low;
     

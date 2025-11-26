@@ -5,7 +5,7 @@
 
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
-    Node<T>* newNode = new Node<T>(value);
+    auto* newNode = new Node<T>(value);
     
     if (tail == nullptr) {
         // Список пуст
@@ -20,7 +20,7 @@ void DoublyLinkedList<T>::push_back(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::push_front(const T& value) {
-    Node<T>* newNode = new Node<T>(value);
+    auto* newNode = new Node<T>(value);
     
     if (head == nullptr) {
         // Список пуст
@@ -83,7 +83,7 @@ void DoublyLinkedList<T>::insert(Iterator<T> pos, const T& value) {
         return;
     }
     
-    Node<T>* newNode = new Node<T>(value);
+    auto* newNode = new Node<T>(value);
     newNode->next = pos.current;
     newNode->prev = pos.current->prev;
     pos.current->prev->next = newNode;

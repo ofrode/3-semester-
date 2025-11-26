@@ -2,6 +2,7 @@
 #define DOUBLYLINKEDLIST_H
 
 #include <cstddef>
+#include <string>
 #include "Node.h"
 
 template<typename T>
@@ -14,7 +15,7 @@ private:
     Node<T>* current;
 
 public:
-    Iterator(Node<T>* node) : current(node) {}
+    explicit Iterator(Node<T>* node) : current(node) {}
 
     // Оператор разыменования
     T& operator*() {
@@ -60,9 +61,10 @@ public:
     bool operator==(const Iterator& other) const {
         return current == other.current;
     }
-
+    
+    // В C++20 operator!= генерируется из operator==, но для совместимости оставляем явную реализацию
     bool operator!=(const Iterator& other) const {
-        return current != other.current;
+        return !(*this == other);
     }
 
     // Дружественный класс для доступа к current
@@ -73,13 +75,13 @@ public:
 template<typename T>
 class DoublyLinkedList {
 private:
-    Node<T>* head;
-    Node<T>* tail;
-    size_t size;
+    Node<T>* head = nullptr;
+    Node<T>* tail = nullptr;
+    size_t size = 0;
 
 public:
     // Конструктор
-    DoublyLinkedList() : head(nullptr), tail(nullptr), size(0) {}
+    DoublyLinkedList() = default;
 
     // Деструктор
     ~DoublyLinkedList() {
@@ -87,7 +89,7 @@ public:
     }
 
     // Копирующий конструктор
-    DoublyLinkedList(const DoublyLinkedList& other) : head(nullptr), tail(nullptr), size(0) {
+    DoublyLinkedList(const DoublyLinkedList& other) {
         Node<T>* current = other.head;
         while (current) {
             push_back(current->data);
@@ -140,12 +142,12 @@ public:
     }
 
     // Получение итератора на начало
-    Iterator<T> begin() {
+    Iterator<T> begin() const {
         return Iterator<T>(head);
     }
 
     // Получение итератора на конец
-    Iterator<T> end() {
+    Iterator<T> end() const {
         return Iterator<T>(nullptr);
     }
 
@@ -161,7 +163,6 @@ public:
 };
 
 // Включение реализации шаблонов
-#include <string>
 #include "../src/DoublyLinkedList.cpp"
 
 #endif // DOUBLYLINKEDLIST_H
