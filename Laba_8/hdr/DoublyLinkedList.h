@@ -58,13 +58,7 @@ public:
     }
 
     // Оператор сравнения
-    bool operator==(const Iterator& other) const {
-        return current == other.current;
-    }
-    
-    bool operator!=(const Iterator& other) const {
-        return !(*this == other);
-    }
+    bool operator==(const Iterator& other) = default;
 
     // Дружественный класс для доступа к current
     friend class DoublyLinkedList<T>;
@@ -160,9 +154,6 @@ public:
         return tail->data;
     }
 };
-
-// Включение реализации шаблонов
-#include "../src/DoublyLinkedList.cpp"
 
 #endif // DOUBLYLINKEDLIST_H
 
