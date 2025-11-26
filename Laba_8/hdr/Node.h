@@ -14,4 +14,6 @@ public:
     explicit Node(const T &value);
 };
 
+#include "../src/Node.cpp"
+
 #endif

@@ -9,7 +9,7 @@ template <typename T>
 class Algorithms
 {
 public:
-    static Iterator<T> binarySearch(DoublyLinkedList<T> &list, const T &value);
+    static Iterator<T> binarySearch(const DoublyLinkedList<T> &list, const T &value);
 
     static void quickSort(DoublyLinkedList<T> &list);
 
@@ -19,5 +19,7 @@ private:
     static Iterator<T> partition(DoublyLinkedList<T> &list, Iterator<T> low, Iterator<T> high, std::function<bool(const T &, const T &)> compare);
     static void quickSortHelper(DoublyLinkedList<T> &list, Iterator<T> low, Iterator<T> high, std::function<bool(const T &, const T &)> compare);
 };
+
+#include "../src/Algorithms.cpp"
 
 #endif

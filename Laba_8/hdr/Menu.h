@@ -26,6 +26,11 @@ private:
     static void deleteElement(DoublyLinkedList<int> &list);
     static void clearList(DoublyLinkedList<int> &list);
 
+    static void deleteFirstElement(DoublyLinkedList<int> &list);
+    static void deleteLastElement(DoublyLinkedList<int> &list);
+    static void deleteByValue(DoublyLinkedList<int> &list);
+    static void deleteByPosition(DoublyLinkedList<int> &list);
+
     static void demonstrateListOperations();
 
     static void demonstrateIterator();
@@ -34,5 +39,7 @@ private:
 
     static void demonstrateSorting();
 };
+
+#include "../src/Menu.cpp"
 
 #endif

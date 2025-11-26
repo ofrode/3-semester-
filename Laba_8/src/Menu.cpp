@@ -199,7 +199,8 @@ void Menu::searchInList(DoublyLinkedList<int> &list)
         return;
     }
 
-    Iterator<int> result = Algorithms<int>::binarySearch(sortedList, value);
+    const DoublyLinkedList<int> &constSortedList = sortedList;
+    Iterator<int> result = Algorithms<int>::binarySearch(constSortedList, value);
     if (result != sortedList.end())
     {
         std::cout << "Элемент " << value << " найден в списке!" << std::endl;
@@ -242,83 +243,17 @@ void Menu::deleteElement(DoublyLinkedList<int> &list)
     switch (choice)
     {
     case 1:
-        if (!list.empty())
-        {
-            int removed = list.front();
-            list.pop_front();
-            std::cout << "Элемент " << removed << " удален из начала списка." << std::endl;
-        }
+        deleteFirstElement(list);
         break;
     case 2:
-        if (!list.empty())
-        {
-            int removed = list.back();
-            list.pop_back();
-            std::cout << "Элемент " << removed << " удален из конца списка." << std::endl;
-        }
+        deleteLastElement(list);
         break;
     case 3:
-    {
-        int value;
-        std::cout << "Введите значение элемента для удаления: ";
-        if (!(std::cin >> value))
-        {
-            std::cout << "Ошибка ввода!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return;
-        }
-
-        bool found = false;
-        for (auto it = list.begin(); it != list.end(); ++it)
-        {
-            if (*it == value)
-            {
-                list.erase(it);
-                std::cout << "Элемент " << value << " удален из списка." << std::endl;
-                found = true;
-                break;
-            }
-        }
-
-        if (!found)
-        {
-            std::cout << "Элемент " << value << " не найден в списке." << std::endl;
-        }
+        deleteByValue(list);
         break;
-    }
     case 4:
-    {
-        int pos;
-        std::cout << "Введите позицию элемента (начиная с 0): ";
-        if (!(std::cin >> pos))
-        {
-            std::cout << "Ошибка ввода!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return;
-        }
-
-        if (pos < 0 || pos >= static_cast<int>(list.getSize()))
-        {
-            std::cout << "Неверная позиция! Размер списка: " << list.getSize() << std::endl;
-            return;
-        }
-
-        auto it = list.begin();
-        for (int i = 0; i < pos && it != list.end(); ++i)
-        {
-            ++it;
-        }
-
-        if (it != list.end())
-        {
-            int removed = *it;
-            list.erase(it);
-            std::cout << "Элемент " << removed << " на позиции " << pos << " удален." << std::endl;
-        }
+        deleteByPosition(list);
         break;
-    }
     default:
         std::cout << "Неверный выбор!" << std::endl;
         return;
@@ -326,6 +261,88 @@ void Menu::deleteElement(DoublyLinkedList<int> &list)
 
     std::cout << "\nСписок после удаления:" << std::endl;
     printList(list);
+}
+
+void Menu::deleteFirstElement(DoublyLinkedList<int> &list)
+{
+    if (!list.empty())
+    {
+        int removed = list.front();
+        list.pop_front();
+        std::cout << "Элемент " << removed << " удален из начала списка." << std::endl;
+    }
+}
+
+void Menu::deleteLastElement(DoublyLinkedList<int> &list)
+{
+    if (!list.empty())
+    {
+        int removed = list.back();
+        list.pop_back();
+        std::cout << "Элемент " << removed << " удален из конца списка." << std::endl;
+    }
+}
+
+void Menu::deleteByValue(DoublyLinkedList<int> &list)
+{
+    int value;
+    std::cout << "Введите значение элемента для удаления: ";
+    if (!(std::cin >> value))
+    {
+        std::cout << "Ошибка ввода!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+
+    bool found = false;
+    for (auto it = list.begin(); it != list.end(); ++it)
+    {
+        if (*it == value)
+        {
+            list.erase(it);
+            std::cout << "Элемент " << value << " удален из списка." << std::endl;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        std::cout << "Элемент " << value << " не найден в списке." << std::endl;
+    }
+}
+
+void Menu::deleteByPosition(DoublyLinkedList<int> &list)
+{
+    int pos;
+    std::cout << "Введите позицию элемента (начиная с 0): ";
+    if (!(std::cin >> pos))
+    {
+        std::cout << "Ошибка ввода!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        return;
+    }
+
+    if (pos < 0 || pos >= static_cast<int>(list.getSize()))
+    {
+        std::cout << "Неверная позиция! Размер списка: " << list.getSize() << std::endl;
+        return;
+    }
+
+    auto it = list.begin();
+    for (int i = 0; i < pos && it != list.end(); ++i)
+    {
+        ++it;
+    }
+
+    if (it != list.end())
+    {
+        int removed = *it;
+        list.erase(it);
+        std::cout << "Элемент " << removed << " на позиции " << pos << " удален." << std::endl;
+    }
 }
 
 void Menu::clearList(DoublyLinkedList<int> &list)
@@ -431,8 +448,10 @@ void Menu::demonstrateSearch()
     std::cout << "\nОтсортированный список:" << std::endl;
     printList(list);
 
+    const DoublyLinkedList<int> &constList = list;
+
     std::cout << "\n1. Бинарный поиск элемента 30:" << std::endl;
-    Iterator<int> result = Algorithms<int>::binarySearch(list, 30);
+    Iterator<int> result = Algorithms<int>::binarySearch(constList, 30);
     if (result != list.end())
     {
         std::cout << "   Элемент найден: " << *result << std::endl;
@@ -443,7 +462,7 @@ void Menu::demonstrateSearch()
     }
 
     std::cout << "\n2. Бинарный поиск элемента 40:" << std::endl;
-    result = Algorithms<int>::binarySearch(list, 40);
+    result = Algorithms<int>::binarySearch(constList, 40);
     if (result != list.end())
     {
         std::cout << "   Элемент найден: " << *result << std::endl;
@@ -454,7 +473,7 @@ void Menu::demonstrateSearch()
     }
 
     std::cout << "\n3. Бинарный поиск элемента 25 (не существует):" << std::endl;
-    result = Algorithms<int>::binarySearch(list, 25);
+    result = Algorithms<int>::binarySearch(constList, 25);
     if (result != list.end())
     {
         std::cout << "   Элемент найден: " << *result << std::endl;
